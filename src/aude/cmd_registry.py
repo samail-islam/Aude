@@ -40,23 +40,10 @@ def registration_sys(cmd, remove=False):
             tasks.append(line.strip())
             lnum += 1
       
-      parsed_task = []
-      
-      for line in tasks:
-         if line.find("%") != -1:
-            for word in line.split(): 
-               if word.startswith("%"):
-                  arg = f"arg{word[1:]}"
-                  prsd_line = line.replace(word, arg)
-                  parsed_task.append(prsd_line)
-         else:
-            parsed_task.append(line)
-      
-      
       data[custom_cmds].append({
          "Name": cmd,
          "Creation Date": time.strftime("%A, %d %b,%Y at %l:%M:%S %P %Z%z"),
-         "tasks": parsed_task
+         "tasks": tasks
         })
         
    else:

@@ -5,12 +5,19 @@ import subprocess
 def run_cmd(cmd):
    for item in data['custom_cmd']:
       if item['Name'] == cmd:
-         i = 1
+         parsed_task = []
          for line in item['tasks']:
-            line = line.replace(f"arg{i}", arglist[i])
+            if line.find("%") != -1:
+               for word in line.split():
+                  if word.startswith("%"):
+                     prsd_line = line.replace(word, arglist[word[1:]])
+                     parsed_task.append(prsd_line)
+                  else:
+                     parsed_task.append(line)
+      
+            
             subprocess.run(line,shell=True)
-            i += 1
-            subprocess.run(f"{line}")
+      
             
             
    
