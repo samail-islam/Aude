@@ -65,9 +65,9 @@ def cmd_info(cmd):
          return item
    print(f"no custom command found called {cmd}")
 cmd_map = {
-   "setup": cmd_check()
-   "del": registration_sys(cmd=arglist[1],remove=True)
-   "l": cmd_list()
-   "info": cmd_info(arglist[1]) 
+   "setup": cmd_check(),
+   "del": registration_sys(cmd=arglist[1],remove=True),
+   "l": cmd_list(),
+   "info": cmd_info(arglist[1])
    
 }
