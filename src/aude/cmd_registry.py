@@ -9,10 +9,10 @@ data = json.loads(DATA_FILE.read_text())
 
 def cmd_check():
    cmd = input("Name: ")
-   exists = [item for item in data if item["Name"] == cmd]
+   exists = [item for item in data['custom_cmds'] if item["Name"] == cmd]
    if exists:
       overwrite = input(f"{cmd} already exists, want to overwrite it?(Y/n): " )
-      if overwrite:
+      if overwrite == "Y":
          registration_sys(cmd, remove=True)
          registration_sys(cmd)
       else:
