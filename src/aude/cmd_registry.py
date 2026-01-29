@@ -1,6 +1,7 @@
 from .config import DATA_FILE
 import json
 import time
+from .cli import arglist
 
 if not DATA_FILE.exists():
       DATA_FILE.write_text(json.dumps({"custom_cmds": []}, indent=4))
