@@ -1,8 +1,8 @@
-from .config import DATA_FILE
 from .registration_sys import data
 import subprocess
 
-def run_cmd(cmd):
+def run_cmd(arglist):
+   cmd = arglist[0]
    for item in data['custom_cmd']:
       if item['Name'] == cmd:
          parsed_task = []
@@ -15,10 +15,17 @@ def run_cmd(cmd):
                   else:
                      parsed_task.append(line)
       
-            
-            subprocess.run(line,shell=True)
+            for line in parsed_task: 
+               print(line)
+            print("commands printed above will be run")
+            cns = input("you want to continue?(just hit enter to continue or type 'n' to stop)")
+            if cns =! "n":
+               subprocess.run(line,shell=True)
+            else: 
+               raise SystemExit(1)
+            return
       
-            
+   print(f"Unknown command {cmd}")  
             
    
    

@@ -2,6 +2,9 @@ from .config import DATA_FILE
 import json
 import time
 
+if not DATA_FILE.exists():
+      DATA_FILE.write_text(json.dumps({"custom_cmds": []}, indent=4))
+
 data = json.loads(DATA_FILE.read_text())
 
 def cmd_check():
@@ -22,11 +25,6 @@ def cmd_check():
 # registration system function
 def registration_sys(cmd, remove=False):
 
-   if not DATA_FILE.exists():
-      DATA_FILE.write_text(
-            json.dumps({"custom_cmds": []}, indent=4)
-        )
-
    if not remove:
       print("Commands to run:\n")
       tasks = []
@@ -40,7 +38,7 @@ def registration_sys(cmd, remove=False):
             tasks.append(line.strip())
             lnum += 1
       
-      data[custom_cmds].append({
+      data['custom_cmds'].append({
          "Name": cmd,
          "Creation Date": time.strftime("%A, %d %b,%Y at %l:%M:%S %P %Z%z"),
          "tasks": tasks
@@ -53,13 +51,23 @@ def registration_sys(cmd, remove=False):
         ]
         
 
-    DATA_FILE.write_text(json.dumps(data, indent=4))
-    print("Done")
+   DATA_FILE.write_text(json.dumps(data, indent=4))
+   print("Done")
     
     
-    
+def cmd_list():
+   for item in data['custom_cmds']: 
+      print(f"Name: {item['Name']} Creation date: {item['Creation Date']}")
+
+def cmd_info(cmd):
+   for item in data['custom_cmds']:
+      if item['Name'] == cmd: 
+         return item
+   print(f"no custom command found called {cmd}")
 cmd_map = {
    "setup": cmd_check()
    "del": registration_sys(cmd=arglist[1],remove=True)
+   "l": cmd_list()
+   "info": cmd_info(arglist[1]) 
    
 }
