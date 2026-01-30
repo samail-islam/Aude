@@ -3,7 +3,7 @@ from . import cmd_registry
 from .run_cmd import run_cmd
 import sys
 
-default_cmd_map = {"v": get_version()}
+default_cmd_map = {"v": get_version}
 default_cmd_map.update(cmd_registry.cmd_map)
 
 argslist = sys.argv[1:]
@@ -20,7 +20,7 @@ def main():
       aude v          - to check version""")
       
    if argslist[0] in default_cmd_map.keys():
-      return default_cmd_map[argslist[0]]
+      return default_cmd_map[argslist[0]](argslist)
    else:
       return run_cmd(argslist)
       
